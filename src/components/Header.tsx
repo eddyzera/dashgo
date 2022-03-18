@@ -1,5 +1,13 @@
-import { Flex, Text, Input, Icon } from '@chakra-ui/react'
-import { RiSearchLine } from 'react-icons/ri'
+import { 
+  Flex, 
+  Text, 
+  Input, 
+  Icon, 
+  HStack, 
+  Box, 
+  Avatar 
+} from '@chakra-ui/react'
+import { RiNotificationLine, RiSearchLine, RiUserAddLine } from 'react-icons/ri'
 
 export const Header = () => {
   return (
@@ -22,6 +30,7 @@ export const Header = () => {
         dashgo
         <Text as="span" ml="1" color="pink.500">.</Text>
       </Text>
+
       <Flex
         as="label"
         flex="1"
@@ -43,6 +52,38 @@ export const Header = () => {
           _placeholder={{ color: "gray.400" }}
         />
         <Icon as={RiSearchLine} fontSize="20" />
+      </Flex>
+
+      <Flex
+        align="center"
+        ml="auto"
+      >
+        <HStack
+          spacing="8"
+          mx="8"
+          pr="8"
+          py="1"
+          color="gray.300"
+          borderRightWidth={1}
+          borderColor="gray.700"
+        >
+          <Icon as={RiNotificationLine} />
+          <Icon as={RiUserAddLine} />
+        </HStack>
+
+        <Flex align="center">
+          <Box mr="4" textAlign="right">
+            <Text>Edgar Silva</Text>
+            <Text color="gray.300" fontSize="small">
+              esilva644@gmail.com
+            </Text>
+          </Box>
+          <Avatar
+            size="md"
+            name="Edgar Silva"
+            src="https://avatars.githubusercontent.com/u/60861927?v=4"
+          />
+        </Flex>
       </Flex>
     </Flex>
   )
