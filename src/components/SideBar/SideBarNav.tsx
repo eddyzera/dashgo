@@ -8,18 +8,18 @@ export const SideBarNav: React.FunctionComponent = () => {
   return (
     <Stack spacing="12" align="flex-start">
       <NavSection title="geral">
-        <NavLink icon={RiDashboardLine}>
+        <NavLink icon={RiDashboardLine} href="/dashboard">
           dashboard
         </NavLink>
-        <NavLink icon={RiContactsLine}>
+        <NavLink icon={RiContactsLine} href="/user">
           usuários
         </NavLink>
       </NavSection>
       <NavSection title="automação">
-        <NavLink icon={RiInputMethodLine}>
+        <NavLink icon={RiInputMethodLine} href="/forms">
           formulários
         </NavLink>
-        <NavLink icon={RiGitMergeLine}>
+        <NavLink icon={RiGitMergeLine} href="/automation">
           automação
         </NavLink>
       </NavSection>
