@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef, ForwardRefRenderFunction } from 'react'
 import { 
   FormControl,
   FormLabel,
@@ -11,7 +11,11 @@ interface InputProps extends ChackraInputProps {
   label?: string
 }
 
-export const Input: React.FunctionComponent<InputProps> = ({ name, label, ...props }) => {
+const InputBase: ForwardRefRenderFunction<HTMLInputElement,InputProps> = ({ 
+  name, 
+  label, 
+  ...props 
+}, ref) => {
   return (
     <FormControl>
       { !!label && <FormLabel htmlFor={name}>{label}</FormLabel> }
@@ -24,9 +28,12 @@ export const Input: React.FunctionComponent<InputProps> = ({ name, label, ...pro
         _hover={{
           bgColor: 'gray.900'
         }}
+        ref={ref}
         size="lg"
         {...props}
       />
     </FormControl>
   )
 }
+
+export const Input = forwardRef(InputBase)
