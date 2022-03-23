@@ -10,7 +10,6 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 const options: ApexOptions = {
   chart: {
-    width: '5%',
     toolbar:{
       show: false
     },
