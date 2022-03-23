@@ -10,6 +10,7 @@ const Chart = dynamic(() => import('react-apexcharts'), {
 
 const options: ApexOptions = {
   chart: {
+    width: '5%',
     toolbar:{
       show: false
     },
@@ -87,7 +88,8 @@ export default function Dashboard() {
             <Chart
               options={options}
               series={series}
-              type="area" height={160}
+              type="area" 
+              height={160}
             />
           </Box>
           <Box
@@ -100,7 +102,8 @@ export default function Dashboard() {
             <Chart
               options={options}
               series={series}
-              type="area" height={160}
+              type="area" 
+              height={160}
             />
           </Box>
         </SimpleGrid>
