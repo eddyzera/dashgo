@@ -20,7 +20,6 @@ const InputBase: ForwardRefRenderFunction<HTMLInputElement,InputProps> = ({
   error = null,
   ...props 
 }, ref) => {
-  console.log(error)
   return (
     <FormControl isInvalid={!!error}>
       { !!label && <FormLabel htmlFor={name}>{label}</FormLabel> }

@@ -15,15 +15,12 @@ export const ActiveLink: React.FunctionComponent<ActiveLinkProps> = ({
   const { asPath } = useRouter()
   const [isActive, setIsActive] = useState<boolean>(false)
   useEffect(() => {
-    console.log('props', props.href)
     if(shouldMatchExactHref && (asPath === props.href || asPath === props.as)) {
-      console.log('useEffect', props.href)
       setIsActive(true)
     }
 
     if(!shouldMatchExactHref && 
       (asPath.startsWith(String(props.href)) || asPath.startsWith(String(props.as)))) {
-        console.log('useEffect', props.href)
         setIsActive(true)
     }
   }, [asPath, props.as, props.href, shouldMatchExactHref])
