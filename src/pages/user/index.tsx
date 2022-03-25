@@ -30,7 +30,7 @@ type UserData = {
 }
 
 export default function UserList() {
-  const { data, isLoading, error } = useQuery<Array<UserData>>('users', 
+  const { data, isLoading, isFetching, error } = useQuery<Array<UserData>>('users', 
     async () => {
       const response = await fetch('http://localhost:3000/api/users')
       const data = await response.json()
@@ -70,7 +70,10 @@ export default function UserList() {
         <SideBar />
         <Box flex="1" borderRadius={8} bg="gray.800" p="8">
           <Flex mb="8" justifyContent="space-between" alignItems="center">
-            <Heading size="lg" fontWeight="normal">Usuários</Heading>
+            <Heading size="lg" fontWeight="normal">
+              Usuários
+              { !isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" /> }
+            </Heading>
             <Link passHref href="/user/create">
               <Button
                 as="a"
