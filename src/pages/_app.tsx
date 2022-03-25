@@ -1,8 +1,8 @@
 import { AppProps } from 'next/app'
-import { ChakraProvider } from '@chakra-ui/react'
-import { customTheme } from '../styles/theme'
 import { SideBarDrawerProvider } from '../provider/context/SideBarContext'
 import { makeServer } from '../services/mirage'
+import { ProviderQuery } from '../provider/query/ProviderQuery'
+import { ThemeProvider } from '../provider/theme/ThemeProvider'
 
 if(process.env.NODE_ENV === 'development') {
   makeServer()
@@ -10,11 +10,13 @@ if(process.env.NODE_ENV === 'development') {
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
-    <ChakraProvider theme={customTheme}>
+    <ThemeProvider>
       <SideBarDrawerProvider>
-        <Component {...pageProps} />
+        <ProviderQuery>
+          <Component {...pageProps} />
+        </ProviderQuery>
       </SideBarDrawerProvider>
-    </ChakraProvider>
+    </ThemeProvider>
   )
 }
 
