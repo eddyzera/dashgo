@@ -21,6 +21,7 @@ import { RiAddLine } from 'react-icons/ri'
 import { Header } from '../../components/Header'
 import { Pagination } from '../../components/Pagination'
 import { SideBar } from '../../components/SideBar'
+import { api } from '../../services/api'
 
 type UserData = {
   created_at: string
@@ -32,8 +33,7 @@ type UserData = {
 export default function UserList() {
   const { data, isLoading, isFetching, error } = useQuery<Array<UserData>>('users', 
     async () => {
-      const response = await fetch('http://localhost:3000/api/users')
-      const data = await response.json()
+      const { data } = await api.get('/users')
       const users = data.users.map(user => {
         return {
           id: user.id,
