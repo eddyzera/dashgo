@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import {
   Box,
+  Link,
   Button,
   Flex,
   Heading,
@@ -22,6 +23,8 @@ import { Header } from '../../components/Header'
 import { Pagination } from '../../components/Pagination'
 import { SideBar } from '../../components/SideBar'
 import { useUsers } from '../../services/hooks/useUsers'
+import { queryClient } from '../../provider/query/ProviderQuery'
+import { api } from '../../services/api'
 
 export default function UserList() {
   const [page, setPage] = useState<number>(1)
@@ -30,6 +33,15 @@ export default function UserList() {
     base: false,
     lg: true
   })
+
+  const handlePrefetchUser = async (userId: number) => {
+    await queryClient.prefetchQuery(['user', userId], async () => {
+      const response = await api.get(`user/${userId}`)
+      return response.data
+    }, {
+      staleTime: 1080 * 60 * 10
+    })
+  }
 
   return (
     <Box>
@@ -48,7 +60,7 @@ export default function UserList() {
               Usuários
               { !isLoading && isFetching && <Spinner size="sm" color="gray.500" ml="4" /> }
             </Heading>
-            <Link passHref href="/user/create">
+            <NextLink passHref href="/user/create">
               <Button
                 as="a"
                 size="sm"
@@ -59,7 +71,7 @@ export default function UserList() {
               >
                 criar novo usuário
               </Button>
-            </Link>
+            </NextLink>
           </Flex>
           { isLoading ? (
             <Flex justify="center" alignItems="center" h="50%">
@@ -93,7 +105,12 @@ export default function UserList() {
                         </Td>
                         <Td>
                           <Box>
-                            <Text fontWeight="bold">{user.name}</Text>
+                            <Link
+                              color="purple.400"
+                              onMouseEnter={() => handlePrefetchUser(Number(user.id))}
+                            >
+                              <Text fontWeight="bold">{user.name}</Text>
+                            </Link>
                             <Text fontSize="sm" color="gray.300">{user.email}</Text>
                           </Box>
                         </Td>
