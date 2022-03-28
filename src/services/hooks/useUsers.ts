@@ -15,7 +15,7 @@ type GetUsersResponse = {
 }
 
 const getUsers = async (page: number): Promise<GetUsersResponse> => {
-  const { data, headers } = await api.get('/users', {
+  const { data, headers } = await api.get<GetUsersResponse>('/users', {
     params : {
       page,
     }
@@ -28,7 +28,7 @@ const getUsers = async (page: number): Promise<GetUsersResponse> => {
       id: user.id,
       name: user.name,
       email: user.email,
-      created_at: new Date(user.createdAt).toLocaleDateString('pt-BR', {
+      created_at: new Date(user.created_at).toLocaleDateString('pt-BR', {
         day: '2-digit',
         month: 'long',
         year: 'numeric'
