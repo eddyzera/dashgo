@@ -35,10 +35,18 @@ export const makeServer = () => {
       this.namespace = 'api'
       this.timing = 750
       this.get('/users', function(schema, request) {
-        const { page = 1, per_page = 10 } = request.queryParams
+
+        // page = qual pagina que mostrar
+        // per_page = quantidades de registros na pagina
+        const { page = 1, per_page = 10 } = request. queryParams
         const total = schema.all('user').length
+
+        // pageStart = inicio o registro
         const pageStart = (Number(page) - 1) * Number(per_page)
+
+        // pageEnd = final do registro
         const pageEnd = pageStart + Number(per_page)
+
         const users = this.serialize(schema.all('user')).users.slice(pageStart, pageEnd)
         return new Response(
           200,
