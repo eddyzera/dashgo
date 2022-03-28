@@ -75,7 +75,10 @@ export const Pagination: React.FunctionComponent<PaginationProps> = ({
       >
         {currentPage > ( 1 + siblingsCount ) && (
           <>
-            <PaginationItem pageNumber={1} />
+            <PaginationItem 
+              pageNumber={1} 
+              onPageChange={onPageChange}
+            />
             { currentPage > ( 2 + siblingsCount ) && (
               <Text color="gray.300" w="8" textAlign="center">...</Text>
             )}
@@ -83,13 +86,29 @@ export const Pagination: React.FunctionComponent<PaginationProps> = ({
         )}
 
         {previousPages.length > 0 && previousPages.map(page => {
-          return <PaginationItem key={page} pageNumber={page} />
+          return (
+            <PaginationItem
+              key={page} 
+              pageNumber={page}
+              onPageChange={onPageChange} 
+            />
+          )
         })}
 
-        <PaginationItem pageNumber={currentPage} isCurrent />
+        <PaginationItem 
+          pageNumber={currentPage} 
+          isCurrent 
+          onPageChange={onPageChange} 
+        />
 
         {nextPages.length > 0 && nextPages.map(page => {
-          return <PaginationItem key={page} pageNumber={page} />
+          return (
+            <PaginationItem 
+              key={page} 
+              pageNumber={page}
+              onPageChange={onPageChange}
+            />
+          )
         })}
 
         {(currentPage + siblingsCount) < lastPage  && (
@@ -97,7 +116,7 @@ export const Pagination: React.FunctionComponent<PaginationProps> = ({
             { (currentPage + 1 + siblingsCount ) < lastPage && (
               <Text color="gray.300" w="8" textAlign="center">...</Text>
             )}
-            <PaginationItem pageNumber={lastPage} />
+            <PaginationItem pageNumber={lastPage} onPageChange={onPageChange} />
           </>
         )}
       </Stack>
